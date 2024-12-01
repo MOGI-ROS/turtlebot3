@@ -25,6 +25,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import ThisLaunchFileDir
+from launch_ros.actions import Node
 
 from launch_ros.substitutions import FindPackageShare
 
@@ -96,4 +97,18 @@ def generate_launch_description():
                 'frame_id': 'base_scan',
             }.items(),
         ),
+
+        Node(
+            namespace=namespace,
+            package='v4l2_camera',
+            executable='v4l2_camera_node',
+            output='screen',
+            parameters=[
+                {'image_size': [640,480],
+                'time_per_frame': [1, 20],
+                'camera_frame_id': 'camera_link_optical',
+                'image_raw.compressed.jpeg_quality': 30
+                },
+            ],
+        )
     ])
