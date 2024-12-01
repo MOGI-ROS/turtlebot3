@@ -16,7 +16,7 @@ diff_drive_controller:
     left_wheel_names: ["wheel_left_joint"]
     right_wheel_names: ["wheel_right_joint"]
 
-    wheel_separation: 0.160
+    wheel_separation: 0.3 # For unknown reason the real wheel separation (0.16) results in terrible odometry. This is also not perfect but way better
     #wheels_per_side: 1  # actually 2, but both are controlled by 1 signal
     wheel_radius: 0.033
 
