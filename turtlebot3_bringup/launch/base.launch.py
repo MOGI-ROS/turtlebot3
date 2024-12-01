@@ -144,7 +144,8 @@ def generate_launch_description():
         ],
         remappings=[
             ('~/cmd_vel_unstamped', 'cmd_vel'),
-            ('~/odom', 'odom')
+            ('~/odom', 'odom'),
+            ("imu_broadcaster/imu", "imu")
         ],
         output="both",
         condition=UnlessCondition(use_sim))
@@ -213,6 +214,17 @@ def generate_launch_description():
                 on_exit=[imu_broadcaster_spawner],
             )
         )
+    
+    twist_stamper_node = Node(
+            namespace=namespace,
+            package='twist_stamper',
+            executable='twist_stamper',
+            remappings=[
+                ('cmd_vel_in', 'cmd_vel'),
+                ('cmd_vel_out', 'diff_drive_controller/cmd_vel'),
+            ],
+            output='screen',
+        )
 
     nodes = [
         control_node,
@@ -221,6 +233,7 @@ def generate_launch_description():
         delay_rviz_after_joint_state_broadcaster_spawner,
         delay_diff_drive_controller_spawner_after_joint_state_broadcaster_spawner,
         delay_imu_broadcaster_spawner_after_joint_state_broadcaster_spawner,
+        twist_stamper_node,
     ]
 
     return LaunchDescription(declared_arguments + nodes)
