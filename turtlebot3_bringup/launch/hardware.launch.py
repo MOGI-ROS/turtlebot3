@@ -105,9 +105,9 @@ def generate_launch_description():
             output='screen',
             parameters=[
                 {'image_size': [640,480],
-                'time_per_frame': [1, 20],
+                'time_per_frame': [1, 10],
                 'camera_frame_id': 'camera_link_optical',
-                'image_raw.compressed.jpeg_quality': 30
+                'image_raw.compressed.jpeg_quality': 20
                 },
             ],
         )
