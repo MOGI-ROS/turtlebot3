@@ -30,14 +30,6 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     start_rviz = LaunchConfiguration('start_rviz')
-    use_sim = LaunchConfiguration('use_sim')
-
-    slam_toolbox_config_dir = PathJoinSubstitution(
-        [
-            FindPackageShare('turtlebot3_slam_toolbox'),
-            'config',
-        ]
-    )
 
     rviz_config_file = PathJoinSubstitution(
         [
@@ -74,7 +66,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(slam_toolbox_launch_path),
             launch_arguments={
-                    'use_sim_time': LaunchConfiguration('use_sim_time'),
+                    'use_sim_time': LaunchConfiguration('use_sim'),
                     'slam_params_file': slam_toolbox_params_path,
             }.items()
         ),
